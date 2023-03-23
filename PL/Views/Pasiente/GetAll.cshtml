@@ -1,0 +1,63 @@
+﻿@model ML.Pasiente
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetAll</h1>
+
+<div class="conteiner">
+    <div class="row">
+        <h2>Pasientes</h2>
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div style="float:right">
+        @Html.ActionLink("+","GetAll","Pasiente", htmlAttributes: new {@class = "bt bt-succes"})
+        <div class="row">
+            @if (Model.Pasientes != null)
+            {
+                <table class=" table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <td class="text-center" style="font-weight:bolder">Editar</td>
+                            <td class="visually-hidden">IdPasiente</td>
+                            <td class="text-center" style="font-weight">Nombre</td>
+                            <td class="text-center" style="font-weight">Apellido Paterno</td>
+                            <td class="text-center" style="font-weight">Apellido Materno</td>
+                            <td class="text-center" style="font-weight">Tipo Sangre</td>
+                            <td class="text-center" style="font-weight">Fecha Nacimiento</td>
+                            <td class="text-center" style="font-weight">Sexo</td>
+                            <td class="text-center" style="font-weight">Fecha Ingreso</td>
+                            <td class="text-center" style="font-weight">Diagnostico</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ML.Pasiente pasiente in Model.Pasientes)
+                        {
+                            <tr>
+                                <td class="text-center"><a class="btn btn-warning" href="@Url.ActionLink("From","Pasiente", new{idPasiente = pasiente.IdPasiente})"></a></td>
+
+                                <td class="visually-hidden">@pasiente.IdPasiente</td>
+                                <td>@pasiente.Nombre</td>
+                                <td>@pasiente.ApellidoPaterno</td>
+                                <td>@pasiente.ApellidoMaterno</td>
+                                <td>@pasiente.TipoSangre.Nombre</td>
+                                <td>@pasiente.FechaIngreso</td>
+                                <td>@pasiente.Sexo</td>
+                                <td>@pasiente.Diagnostico</td>
+
+                                <td class="text-center"><a class="btn btn-danger" href="@Url.Action("Delete","Pasiente", new {idPasiente = pasiente.IdPasiente})" onclick="return confirm"></a></td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+
+</div>
+
